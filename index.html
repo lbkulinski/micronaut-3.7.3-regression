@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+</head>
+<body>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function test(accessToken) {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/example",
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            },
+            complete: (xhr) => {
+                console.log(xhr.getAllResponseHeaders());
+            }
+        });
+    } //test
+
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8543/realms/Test/protocol/openid-connect/token",
+            data: {
+                username: "foo@bar.com",
+                password: "password",
+                grant_type: "password",
+                client_id: "micronaut",
+                client_secret: "DiSy0Ov41lPGUoPtUHkb5Y1ak8mCBtZX"
+            },
+            success: (data) => test(data.access_token),
+            error: () => console.log("Error: The JWT could not be obtained")
+        });
+    });
+</script>
+</html>

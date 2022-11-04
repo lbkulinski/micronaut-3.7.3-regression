@@ -1,0 +1,24 @@
+micronaut:
+  application:
+    name: coffee4j_back_end
+  server:
+    cors:
+      enabled: true
+      configurations:
+        web:
+          exposedHeaders:
+            - Location
+          allowCredentials: false
+  security:
+    authentication: idtoken
+    oauth2:
+      clients:
+        micronaut:
+          client-id: micronaut
+          client-secret: DiSy0Ov41lPGUoPtUHkb5Y1ak8mCBtZX
+          openid:
+            issuer: http://localhost:8543/realms/Test
+netty:
+  default:
+    allocator:
+      max-order: 3
